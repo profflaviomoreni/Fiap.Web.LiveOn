@@ -1,5 +1,6 @@
 ﻿using Fiap.Web.LiveOn.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Fiap.Web.LiveOn.Controllers
 {
@@ -43,7 +44,12 @@ namespace Fiap.Web.LiveOn.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Montadoras = montadoras;
+            var selectListMontadoras =
+                new SelectList(montadoras,
+                                nameof(Montadora.MontadoraId),
+                                nameof(Montadora.Nome));
+
+            ViewBag.Montadoras = selectListMontadoras;
 
             return View();
         }
