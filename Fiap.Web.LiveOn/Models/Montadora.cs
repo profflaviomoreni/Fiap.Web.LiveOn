@@ -1,8 +1,10 @@
-﻿namespace Fiap.Web.LiveOn.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Fiap.Web.LiveOn.Models
 {
+
     public class Montadora
     {
-
         public int MontadoraId { get; set; }
         public string Nome { get; set; }
         public string PaisOrigem { get; set; }

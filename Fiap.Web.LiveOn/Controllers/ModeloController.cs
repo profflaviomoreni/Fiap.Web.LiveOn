@@ -1,4 +1,5 @@
-﻿using Fiap.Web.LiveOn.Models;
+﻿using Fiap.Web.LiveOn.Data.Contexts;
+using Fiap.Web.LiveOn.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -11,21 +12,15 @@ namespace Fiap.Web.LiveOn.Controllers
 
         private List<Montadora> montadoras;
 
-        public ModeloController() {
 
-            modeloVeiculos = new List<ModeloVeiculo>();
-            modeloVeiculos.Add(new ModeloVeiculo(1, "Mustang",  2021, "Gasolina"));
-            modeloVeiculos.Add(new ModeloVeiculo(2, "Corolla",  2022, "Híbrido"));
-            modeloVeiculos.Add(new ModeloVeiculo(3, "Golf",  2020, "Diesel"));
+        private readonly DatabaseContext _databaseContext;
 
 
-            montadoras = new List<Montadora>
-            {
-                new Montadora(1,"Ford", "Estados Unidos", 1903),
-                new Montadora(2,"Toyota", "Japão", 1937),
-                new Montadora(3,"Volkswagen", "Alemanha", 1937)
-            };
+        public ModeloController(DatabaseContext databaseContext) {
 
+            _databaseContext = databaseContext; // new DatabaseContext();
+
+            montadoras = databaseContext.Montadoras.ToList();
 
         }
 
@@ -35,7 +30,7 @@ namespace Fiap.Web.LiveOn.Controllers
 
             // SELECT * FROM TB_MODELOS
             //var listaModelos = repository.GetAll();
-            var listaModelos = modeloVeiculos;
+            var listaModelos = _databaseContext.ModeloVeiculos.ToList();
 
             return View(listaModelos);
         }
@@ -59,6 +54,10 @@ namespace Fiap.Web.LiveOn.Controllers
         public IActionResult Create(ModeloVeiculo modeloVeiculo)
         {
             // INSERT INTO TB_MODELO_VEICULOS
+
+            _databaseContext.ModeloVeiculos.Add(modeloVeiculo);
+            _databaseContext.SaveChanges();
+
             var mensagem = "Veículos inserido com sucesso";
             return RedirectToAction("Index");   
         }
