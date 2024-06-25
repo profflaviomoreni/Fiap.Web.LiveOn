@@ -1,5 +1,6 @@
 using Fiap.Web.LiveOn.Data.Contexts;
 using Fiap.Web.LiveOn.Models;
+using Fiap.Web.LiveOn.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -33,8 +34,20 @@ namespace Fiap.Web.LiveOn.Controllers
             //_context.Montadoras.Add(montadora);
             //_context.SaveChanges();
 
-            return View();
+
+
+
+            var vm = new DashboardViewModel();
+            vm.TotalClientePF = 10;
+            vm.TotalClientePJ = 99;
+            vm.TotalClientes = 109;
+            vm.TotalVendasMes = 1000;
+            vm.TotalVeiculos = 56;
+
+
+            return View(vm);
         }
+
 
         public IActionResult Privacy()
         {

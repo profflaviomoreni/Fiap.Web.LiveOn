@@ -1,4 +1,5 @@
 using Fiap.Web.LiveOn.Data.Contexts;
+using Fiap.Web.LiveOn.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddDbContext<DatabaseContext>(
 ); 
 #endregion
 
+
+builder.Services.AddScoped<IMontadoraRepository, MontadoraTextRepository>();
 
 
 // Add services to the container.

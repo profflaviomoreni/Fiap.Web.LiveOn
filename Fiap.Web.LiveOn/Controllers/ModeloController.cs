@@ -37,6 +37,21 @@ namespace Fiap.Web.LiveOn.Controllers
 
 
         [HttpGet]
+        public IActionResult GetDetailsByName([FromQuery] String nome)
+        {
+
+            var paramNome = nome;
+
+            // SELECT * FROM TB_MODELOS
+            //var listaModelos = repository.GetAll();
+            var listaModelos = _databaseContext.ModeloVeiculos.ToList();
+
+            return View(listaModelos);
+        }
+
+
+
+        [HttpGet]
         public IActionResult Create()
         {
             var selectListMontadoras =
