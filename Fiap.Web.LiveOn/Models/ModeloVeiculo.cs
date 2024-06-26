@@ -1,4 +1,6 @@
-﻿namespace Fiap.Web.LiveOn.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Fiap.Web.LiveOn.Models
 {
     public class ModeloVeiculo
     {
@@ -7,6 +9,8 @@
         public string NomeModelo { get; set; }
 
         public int MontadoraId { get; set; }
+
+        [NotMapped]
         public Montadora Montadora { get; set; }
         public int AnoModelo { get; set; }
         public string TipoCombustivel { get; set; }
